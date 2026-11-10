@@ -19,6 +19,7 @@ h1,h2,h3{margin:0}
 button,input,select,textarea{font:inherit;color:inherit}
 .hidden{display:none!important}
 
+/* Barra superior */
 .topbar{background:linear-gradient(135deg,#0d2a4a,#1d5b9c);color:#fff;
   padding:14px 22px;display:flex;align-items:center;justify-content:space-between;
   gap:16px;flex-wrap:wrap}
@@ -28,12 +29,21 @@ button,input,select,textarea{font:inherit;color:inherit}
   font-weight:800;letter-spacing:.5px}
 .brand h1{font-size:17px;font-weight:700}
 .brand p{margin:0;font-size:11.5px;opacity:.75;letter-spacing:.5px;text-transform:uppercase}
-.topbar-right{display:flex;align-items:center;gap:10px}
+.topbar-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .topbar-right label{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;
   opacity:.85;display:flex;align-items:center;gap:8px}
 .topbar select{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);
   color:#fff;border-radius:8px;padding:7px 10px;font-weight:600}
 .topbar select option{color:#0f172a}
+/* Grupo de botones a la derecha */
+.topbar-actions{display:flex;gap:8px;margin-left:16px;border-left:1px solid rgba(255,255,255,.2);padding-left:16px}
+.topbar .btn-square{
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+  border-radius:10px;color:#fff;font-size:18px;cursor:pointer;transition:.15s;
+  box-shadow:0 2px 4px rgba(0,0,0,.1);
+}
+.topbar .btn-square:hover{background:rgba(255,255,255,.28);transform:scale(1.05)}
 
 .tabs{display:flex;gap:4px;padding:0 22px;background:#fff;
   border-bottom:1px solid var(--line);overflow-x:auto}
@@ -134,9 +144,6 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
 
 .sub-tools{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
 
-/* ============================================================
-   SELECTOR DE CONCEPTOS (lista desplegable)
-   ============================================================ */
 .concept-selector{margin-top:14px;border:1px solid var(--line);border-radius:10px;
   background:#fbfdff;overflow:hidden}
 .concept-selector>summary{cursor:pointer;padding:12px 16px;font-weight:700;
@@ -171,9 +178,6 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
 .sel-estado{text-align:center;font-size:14px}
 .sel-vacio{padding:16px;text-align:center;color:var(--muted);font-style:italic;font-size:12.5px}
 
-/* ============================================================
-   Status del comprobante
-   ============================================================ */
 .comp-status{display:flex;align-items:center;gap:12px;padding:12px 16px;
   border-radius:10px;font-size:13px;font-weight:600;margin-bottom:4px;flex-wrap:wrap}
 .comp-status.pending{background:#fff4e0;color:#b45309;border:1px solid #f0dfae}
@@ -181,9 +185,6 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
 .comp-status.partial{background:#eaf3ff;color:#1d5b9c;border:1px solid #c7dcf0}
 .comp-status .grow{flex:1}
 
-/* ============================================================
-   DOCUMENTOS IMPRIMIBLES
-   ============================================================ */
 .print-area{padding:34px 44px;background:#fff;min-height:600px}
 .submayor-doc,.comprobante-doc{font-family:'Times New Roman',Georgia,serif;
   color:#000;max-width:900px;margin:0 auto}
@@ -206,7 +207,10 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
 .submayor-table tr.empty-row td{color:#94a3b8;text-align:center;padding:14px;font-style:italic}
 .doc-total{text-align:right;font-size:11.5px;font-weight:700;margin-bottom:8px;
   padding:4px 8px;letter-spacing:.4px}
-.doc-firma{margin-top:70px;text-align:center;font-family:'Times New Roman',Georgia,serif}
+
+.doc-firma{margin-top:50px;text-align:center;font-family:'Times New Roman',Georgia,serif}
+.firma-img-wrap{height:50px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:4px}
+.firma-img{max-height:50px;max-width:180px;object-fit:contain;mix-blend-mode:multiply}
 .firma-line{border-top:1px solid #000;width:300px;margin:0 auto 6px}
 .firma-nombre{font-weight:700;font-size:12px}
 .firma-cargo{font-size:11px;color:#333}
@@ -238,7 +242,7 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
 .comp-exp-text{line-height:1.4}
 
 .comp-firmas{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;
-  margin-top:60px;text-align:center;font-family:'Times New Roman',Georgia,serif}
+  margin-top:40px;text-align:center;font-family:'Times New Roman',Georgia,serif}
 .comp-firma .line{border-top:1px solid #000;margin-bottom:6px;height:1px}
 .comp-firma .label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
   color:#555;margin-bottom:3px}
@@ -290,9 +294,15 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
     </div>
   </div>
   <div class="topbar-right">
+    <!-- Ejercicio pegado a la izquierda -->
     <label>Ejercicio
       <select id="selEjercicio"></select>
     </label>
+    <!-- Botones a la derecha -->
+    <div class="topbar-actions">
+      <button class="btn-square" id="btnSalvarTop" title="Guardar archivo de respaldo">💾</button>
+      <button class="btn-square" id="btnImportarTop" title="Importar archivo de respaldo">📂</button>
+    </div>
   </div>
 </header>
 
@@ -328,7 +338,6 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
     </div>
   </section>
 
-  <!-- ============ COMPROBANTE ============ -->
   <section id="view-comprobante" class="view">
     <div class="card no-print">
       <div class="card-head">
@@ -348,7 +357,6 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
       </div>
       <div class="card-body" style="padding-top:14px;padding-bottom:16px">
 
-        <!-- Selector de conceptos (lista desplegable) -->
         <details class="concept-selector" id="compSelector" open>
           <summary>
             📋 Conceptos a incluir en el comprobante
@@ -411,6 +419,9 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
 
         <div class="comp-firmas">
           <div class="comp-firma">
+            <div class="firma-img-wrap">
+              <img src="" id="compFirmaImg" class="firma-img hidden" alt="Firma">
+            </div>
             <div class="line"></div>
             <div class="label">HECHO</div>
             <div class="name" id="compFirmaHecho"></div>
@@ -439,7 +450,6 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
     </div>
   </section>
 
-  <!-- ============ SUBMAYOR ============ -->
   <section id="view-submayor" class="view">
     <div class="card no-print">
       <div class="card-head">
@@ -506,6 +516,9 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
         <div class="doc-total" id="docTotal306"></div>
 
         <div class="doc-firma">
+          <div class="firma-img-wrap">
+            <img src="" id="docFirmaImg" class="firma-img hidden" alt="Firma">
+          </div>
           <div class="firma-line"></div>
           <div class="firma-nombre" id="docFirmaNombre"></div>
           <div class="firma-cargo" id="docFirmaCargo"></div>
@@ -585,8 +598,20 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
             <input id="fFirmanteCargo" placeholder="Ej: Especialista C en Gestión Económica">
           </label>
         </div>
+        
+        <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--line)">
+          <label class="fld">Firma digital (Imagen sin fondo, PNG preferiblemente)</label>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+            <input type="file" id="fFirmaFile" accept="image/*" style="font-size:12px;padding:6px;max-width:300px">
+            <button class="btn danger mini hidden" id="btnQuitarFirma" type="button">Quitar firma</button>
+          </div>
+          <div id="previewFirma" style="margin-top:14px;padding:10px;background:#f9fbfe;border:1px dashed #ccc;border-radius:8px;display:inline-block;min-width:200px;text-align:center">
+            <!-- Aquí se mostrará la previsualización -->
+          </div>
+        </div>
+
         <div class="actions">
-          <button class="btn primary" id="btnSaveEntidad">Guardar</button>
+          <button class="btn primary" id="btnSaveEntidad">Guardar textos</button>
         </div>
       </div>
     </div>
@@ -599,8 +624,8 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
           periódicamente o antes de cambiar de equipo.
         </div>
         <div class="actions">
-          <button class="btn" id="btnExportJSON">Exportar JSON</button>
-          <button class="btn" id="btnImportJSON">Importar JSON</button>
+          <button class="btn" id="btnExportJSON">💾 Guardar archivo (JSON)</button>
+          <button class="btn" id="btnImportJSON">📂 Importar archivo (JSON)</button>
           <button class="btn danger" id="btnReset">Borrar todos los datos</button>
           <input type="file" id="fileJSON" accept=".json" class="hidden">
         </div>
@@ -697,9 +722,9 @@ tfoot td{background:#f1f6fb;font-weight:700;border-top:2px solid var(--line)}
 
 <script>
 /* =====================================================================
-   GASTOS DIFERIDOS · v5.0
-   + Selector de conceptos por mes
-   + Pasar/revertir por concepto (no por mes completo)
+   GASTOS DIFERIDOS · v5.3
+   + Selector Ejercicio alineado a la izquierda
+   + Botones de Guardar/Importar cuadrados a la derecha
    ===================================================================== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -755,7 +780,8 @@ const CUENTAS_DEFAULT = [
 
 const FIRMANTE_DEFAULT = {
   nombre: 'Eieser Duarte López',
-  cargo:  'Especialista C en Gestión Económica'
+  cargo:  'Especialista C en Gestión Económica',
+  firmaUrl: ''
 };
 
 const round2 = n => Math.round((n + Number.EPSILON) * 100) / 100;
@@ -780,7 +806,6 @@ function addMonthsClamped(d, n) {
 }
 const DIAS = 86400000;
 
-/* ---------- Estado ---------- */
 function defaultDB() {
   return {
     entidad: 'AGENCIA GENERAL DE SEGURIDAD',
@@ -789,8 +814,8 @@ function defaultDB() {
     gastos: [],
     firmante: { ...FIRMANTE_DEFAULT },
     submayorMes: 0,
-    conceptosPasados: {},       // "YYYY-MM|cta-sub-ana-det" => {fecha, monto, nro}
-    seleccionComprobante: {}    // "YYYY-MM" => [key, key, ...]
+    conceptosPasados: {},
+    seleccionComprobante: {}
   };
 }
 
@@ -814,7 +839,6 @@ function normalizarCuenta(c) {
   };
 }
 
-/* Migra mesesPasados viejos -> conceptosPasados por concepto */
 function migrarMesesPasados(d) {
   if (!d.mesesPasados || Object.keys(d.mesesPasados).length === 0) return;
   d.conceptosPasados = d.conceptosPasados || {};
@@ -927,7 +951,7 @@ function saldoFinalEnEjercicio(g, year) {
 }
 
 /* =====================================================================
-   COMPROBANTE · conceptos y estado
+   COMPROBANTE
    ===================================================================== */
 function mesKey(y, m) { return `${y}-${String(m + 1).padStart(2, '0')}`; }
 function conceptoKey(c) {
@@ -937,7 +961,6 @@ function estadoConceptoMes(y, m, keyConcepto) {
   return DB.conceptosPasados?.[`${mesKey(y, m)}|${keyConcepto}`] || null;
 }
 
-/* Conceptos con amortización en el mes (todos, sin filtrar por selección) */
 function conceptosDelMes(year, mes) {
   const grupos = new Map();
   DB.gastos.forEach(g => {
@@ -967,7 +990,6 @@ function conceptosDelMes(year, mes) {
   return [...grupos.values()].sort((a, b) => a.key.localeCompare(b.key));
 }
 
-/* Selección efectiva del mes: lo guardado si existe, si no, todos los pendientes */
 function seleccionEfectiva(year, mes) {
   const conceptos = conceptosDelMes(year, mes);
   const guardada = DB.seleccionComprobante?.[mesKey(year, mes)];
@@ -986,7 +1008,6 @@ function guardarSeleccion(year, mes, keys) {
   save();
 }
 
-/* Devuelve { pendientesSeleccionados, todosPendientes, todosConceptos } */
 function resumenComprobante(year, mes) {
   const conceptos = conceptosDelMes(year, mes);
   const sel = new Set(seleccionEfectiva(year, mes));
@@ -1015,9 +1036,20 @@ function renderAll() {
   renderSubmayor();
   renderResumen();
   renderCatalogos();
+  
   $('#fEntidad').value = DB.entidad;
   $('#fFirmanteNombre').value = DB.firmante?.nombre || '';
   $('#fFirmanteCargo').value  = DB.firmante?.cargo  || '';
+  
+  const prev = $('#previewFirma');
+  if (DB.firmante.firmaUrl) {
+    prev.innerHTML = `<img src="${DB.firmante.firmaUrl}" style="max-height:50px;max-width:200px;object-fit:contain">`;
+    $('#btnQuitarFirma').classList.remove('hidden');
+  } else {
+    prev.innerHTML = '<span style="font-size:12px;color:#999">Sin firma cargada</span>';
+    $('#btnQuitarFirma').classList.add('hidden');
+  }
+
   actualizarPreview();
 }
 
@@ -1111,6 +1143,14 @@ function renderComprobante() {
   $('#compFirmaHechoCargo').textContent = DB.firmante?.cargo || '';
   $('#compNro').textContent = `C-${mesKey(y, m)}`;
 
+  const firmaImg = $('#compFirmaImg');
+  if (DB.firmante.firmaUrl) {
+    firmaImg.src = DB.firmante.firmaUrl;
+    firmaImg.classList.remove('hidden');
+  } else {
+    firmaImg.classList.add('hidden');
+  }
+
   renderSelectorConceptos(y, m);
   renderTablaComprobante(y, m);
   renderEstadoComprobante(y, m);
@@ -1158,7 +1198,6 @@ function renderSelectorConceptos(y, m) {
     </label>`;
   }).join('');
 
-  /* Eventos de checkboxes (solo no bloqueados) */
   $$('#selLista input[type=checkbox]').forEach(inp => {
     inp.addEventListener('change', e => {
       const key = e.target.dataset.key;
@@ -1170,14 +1209,12 @@ function renderSelectorConceptos(y, m) {
     });
   });
 
-  /* Botones de acción rápida */
   $('#btnSelTodos').onclick = () => {
     const todas = conceptos.map(c => c.key);
     guardarSeleccion(y, m, todas);
     renderComprobante();
   };
   $('#btnSelNinguno').onclick = () => {
-    /* Solo podemos quitar los pendientes; los pasados no se pueden tocar */
     const pasadasKeys = conceptos
       .filter(c => estadoConceptoMes(y, m, c.key)).map(c => c.key);
     guardarSeleccion(y, m, pasadasKeys);
@@ -1197,7 +1234,6 @@ function renderTablaComprobante(y, m) {
   const tb = $('#tbComprobante');
   const tf = $('#tfComprobante');
 
-  /* Mostramos SOLO los seleccionados que están pendientes (los pasados no se vuelven a pasar) */
   const aMostrar = conceptos.filter(c =>
     seleccion.has(c.key) && !estadoConceptoMes(y, m, c.key));
 
@@ -1340,7 +1376,6 @@ function renderEstadoComprobante(y, m) {
   }
 }
 
-/* ---------- Pasar / revertir ---------- */
 function pasarSeleccionados(y, m) {
   const r = resumenComprobante(y, m);
   if (!r.pendientesSel.length) {
@@ -1363,14 +1398,6 @@ function pasarSeleccionados(y, m) {
   });
   save();
   renderAll();
-}
-
-function revertirConcepto(y, m, keyConcepto) {
-  const k = `${mesKey(y, m)}|${keyConcepto}`;
-  if (!DB.conceptosPasados?.[k]) return;
-  if (!confirm(`¿Revertir el posting de ${keyConcepto}?`)) return;
-  delete DB.conceptosPasados[k];
-  save(); renderAll();
 }
 
 function revertirTodos(y, m) {
@@ -1442,6 +1469,14 @@ function renderSubmayor() {
   $('#docFirmaNombre').textContent = DB.firmante?.nombre || '';
   $('#docFirmaCargo').textContent  = DB.firmante?.cargo  || '';
   $('#docBadgeCont').innerHTML = badgeMesContable(y, m);
+
+  const firmaImg = $('#docFirmaImg');
+  if (DB.firmante.firmaUrl) {
+    firmaImg.src = DB.firmante.firmaUrl;
+    firmaImg.classList.remove('hidden');
+  } else {
+    firmaImg.classList.add('hidden');
+  }
 
   const activos = DB.gastos.map(g => {
     const fila = calcularFilaSubmayor(g, y, m);
@@ -1814,6 +1849,41 @@ function resetForm() {
 }
 
 /* =====================================================================
+   FUNCIONES DE RESPALDO
+   ===================================================================== */
+function guardarArchivoJSON() {
+  const blob = new Blob([JSON.stringify(DB, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const fecha = new Date().toISOString().slice(0, 10);
+  a.download = `respaldo_gastos_diferidos_${fecha}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importarArchivoJSON(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const d = JSON.parse(ev.target.result);
+      if (!Array.isArray(d.gastos)) throw new Error('Formato inválido');
+      if (!confirm('Esto reemplazará los datos actuales. ¿Continuar?')) return;
+      DB = { ...defaultDB(), ...d,
+        cuentas: (d.cuentas || []).map(normalizarCuenta),
+        gastos: d.gastos.map(normalizarGasto)
+      };
+      if (d.mesesPasados) migrarMesesPasados(DB);
+      save(); renderAll();
+      alert('Respaldo importado correctamente.');
+    } catch (err) {
+      alert('Error al importar: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* =====================================================================
    EVENTOS
    ===================================================================== */
 $('#fCarryover').addEventListener('change', () => {
@@ -1944,35 +2014,17 @@ $('#btnCSV').addEventListener('click', () => {
   URL.revokeObjectURL(a.href);
 });
 
-$('#btnExportJSON').addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(DB, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `respaldo_gastos_${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
-  URL.revokeObjectURL(a.href);
-});
+/* Botones superiores */
+$('#btnSalvarTop').addEventListener('click', guardarArchivoJSON);
+$('#btnImportarTop').addEventListener('click', () => $('#fileJSON').click());
 
+/* Botones en Datos */
+$('#btnExportJSON').addEventListener('click', guardarArchivoJSON);
 $('#btnImportJSON').addEventListener('click', () => $('#fileJSON').click());
 
 $('#fileJSON').addEventListener('change', e => {
   const f = e.target.files[0];
-  if (!f) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      const d = JSON.parse(ev.target.result);
-      if (!Array.isArray(d.gastos)) throw new Error('Formato inválido');
-      DB = { ...defaultDB(), ...d,
-        cuentas: (d.cuentas || []).map(normalizarCuenta),
-        gastos: d.gastos.map(normalizarGasto)
-      };
-      if (d.mesesPasados) migrarMesesPasados(DB);
-      save(); renderAll();
-      alert('Respaldo importado.');
-    } catch (err) { alert('Error: ' + err.message); }
-  };
-  reader.readAsText(f);
+  importarArchivoJSON(f);
   e.target.value = '';
 });
 
@@ -1986,10 +2038,30 @@ $('#btnSaveEntidad').addEventListener('click', () => {
   DB.entidad = $('#fEntidad').value.trim() || 'AGENCIA GENERAL DE SEGURIDAD';
   DB.firmante = {
     nombre: $('#fFirmanteNombre').value.trim() || FIRMANTE_DEFAULT.nombre,
-    cargo:  $('#fFirmanteCargo').value.trim()  || FIRMANTE_DEFAULT.cargo
+    cargo:  $('#fFirmanteCargo').value.trim()  || FIRMANTE_DEFAULT.cargo,
+    firmaUrl: DB.firmante.firmaUrl || ''
   };
   save(); renderAll();
   alert('Configuración guardada.');
+});
+
+$('#fFirmaFile').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    DB.firmante.firmaUrl = ev.target.result;
+    save();
+    renderAll();
+    alert('Firma guardada correctamente. Ya aparecerá en las impresiones.');
+  };
+  reader.readAsDataURL(file);
+});
+
+$('#btnQuitarFirma').addEventListener('click', () => {
+  DB.firmante.firmaUrl = '';
+  save();
+  renderAll();
 });
 
 $$('.tab').forEach(t => {
